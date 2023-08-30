@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: nginx
+    hostname: nginx
+    image: nginx:latest
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - hicardi_network
+
+  springboot:
+    container_name: spring-dev
+    image: dongast/hicardi:latest-dev
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_PROFILES_ACTIVE : dev-env # 사용할 profile 지정
+    networks:
+      - hicardi_network
+
+networks:
+  hicardi_network:
+    driver: bridge
