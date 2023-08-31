@@ -96,8 +96,8 @@ jobs:
             cd hicardi
             sudo docker-compose down
             sudo docker-compose pull
-            sudo docker image rm ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
             sudo docker-compose up -d
+            sudo docker image prune -f
 
       # REMOVE Github IP FROM security group
       - name: Remove IP FROM security group
