@@ -1,15 +1,6 @@
 version: '3'
 
 services:
-  nginx:
-    container_name: nginx-hicardi
-    image: nginx-hicardi:latest
-    ports:
-      - 80:80
-      - 443:443
-    networks:
-      - hicardi_network
-
   redis:
     container_name: redis-hicardi
     hostname: redis
