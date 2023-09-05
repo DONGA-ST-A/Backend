@@ -10,11 +10,22 @@ services:
     networks:
       - hicardi_network
 
+  redis:
+    container_name: redis-hicardi
+    hostname: redis
+    image: redis:latest
+    ports:
+      - 6379:6379
+    networks:
+      - hicardi_network
+
   springboot:
     container_name: spring-dev
     image: dongast/hicardi:latest-dev
     ports:
       - 8080:8080
+    depends_on:
+      - redis
     environment:
       SPRING_PROFILES_ACTIVE : dev-env # 사용할 profile 지정
     networks:
