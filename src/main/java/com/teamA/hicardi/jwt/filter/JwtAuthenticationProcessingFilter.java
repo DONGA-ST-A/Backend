@@ -68,7 +68,7 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
         }
 
         // Access Token이 만료되어 Refresh Token으로 Access Token 재발급
-        String refreshToken = jwtService.extractRefreshToken(request).orElse(null);
+        String refreshToken = jwtService.extractRefreshToken(request);
         if (StringUtils.hasText(accessToken) && jwtService.isTokenValid(refreshToken)) {
             log.info("AccessToken 재발급");
             String email = jwtService.extractEmail(refreshToken).orElseThrow(() -> new TokenException(INVALID_TOKEN));
@@ -92,7 +92,8 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
         getAuthentication(newAccessToken);
         redisUtil.delete(email);
         jwtService.updateRefreshToken(email, newRefreshToken);
-        jwtService.sendAccessAndRefreshToken(response, newAccessToken, refreshToken);
+        jwtService.sendAccessToken(response, newAccessToken);
+        jwtService.sendRefreshToken(response, newRefreshToken);
         log.info("AccessToken, RefreshToken 재발급 완료");
     }
 

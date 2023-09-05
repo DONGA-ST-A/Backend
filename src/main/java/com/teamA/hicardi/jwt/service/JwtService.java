@@ -100,10 +100,18 @@ public class JwtService {
     /**
      * 헤더에서 RefreshToken 추출
      */
-    public Optional<String> extractRefreshToken(HttpServletRequest request) {
-        return Optional.ofNullable(request.getHeader(refreshHeader))
-                .filter(refreshToken -> refreshToken.startsWith(BEARER))
-                .map(refreshToken -> refreshToken.replace(BEARER, ""));
+    public String extractRefreshToken(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals(REFRESH_TOKEN_SUBJECT)) {
+                    log.info(cookie.getValue());
+                    return cookie.getValue();
+                }
+            }
+        }
+        return null;
     }
 
     /**
