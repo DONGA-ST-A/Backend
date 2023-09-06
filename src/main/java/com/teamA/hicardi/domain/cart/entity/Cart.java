@@ -5,6 +5,7 @@ import com.teamA.hicardi.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,4 +23,8 @@ public class Cart extends BaseTimeEntity {
     @JoinColumn(name = "memberId")
     private Member member;
 
+    @Builder
+    public Cart(Member member) {
+        this.member = member;
+    }
 }

@@ -6,6 +6,7 @@ import com.teamA.hicardi.domain.item.entity.Item;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -29,4 +30,10 @@ public class CartItem extends BaseTimeEntity {
 
     private Integer count;
 
+    @Builder
+    public CartItem(Cart cart, Item item, Integer count) {
+        this.cart = cart;
+        this.item = item;
+        this.count = count;
+    }
 }
