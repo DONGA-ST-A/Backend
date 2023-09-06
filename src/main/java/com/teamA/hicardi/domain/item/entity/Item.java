@@ -4,6 +4,7 @@ import com.teamA.hicardi.common.entity.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,4 +27,11 @@ public class Item extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private SellStatus status;
 
+    @Builder
+    public Item(String content, Integer price, Integer stock, SellStatus status) {
+        this.content = content;
+        this.price = price;
+        this.stock = stock;
+        this.status = status;
+    }
 }
