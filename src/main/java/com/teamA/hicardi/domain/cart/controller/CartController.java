@@ -23,4 +23,11 @@ public class CartController {
 
 	private final CartService cartService;
 
+	@PostMapping("/add")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public ResponseEntity<Void> addCartItem(@RequestBody CartItemAddRequestDto cartItemAddRequestDto, @AuthenticationPrincipal UserDetails loginUser){
+		cartService.addCartItem(cartItemAddRequestDto, loginUser.getUsername());
+		return ResponseDto.noContent();
+	}
+
 }

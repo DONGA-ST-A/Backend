@@ -33,4 +33,38 @@ public class CartService {
 
 	private final ItemRepository itemRepository;
 
+	@Transactional
+	public void addCartItem(CartItemAddRequestDto cartItemAddRequestDto, String userId) {
+
+		Member findMember =  memberRepository.findByUserId(userId)
+			.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
+
+		Long memberId = findMember.getId();
+
+		boolean existsCart = cartRepository.existsCartByMember_Id(memberId);
+
+		// 장바구니가 존재하지 않을때 장바구니 생성
+		if(!existsCart){
+			cartRepository.save(
+				Cart.builder()
+					.member(findMember)
+					.build());
+		}
+
+		// 해당 회원의 장바구니를 가져와서 상품을 추가
+		Cart findCart = cartRepository.findCartByMember_Id(memberId)
+			.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 장바구니입니다."));
+
+		Item findItem = itemRepository.findById(cartItemAddRequestDto.getItemId())
+			.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상품입니다."));
+
+		CartItem cartItem = CartItem.builder()
+			.cart(findCart)
+			.item(findItem)
+			.count(cartItemAddRequestDto.getCount())
+			.build();
+
+		cartItemRepository.save(cartItem);
+	}
+
 }
