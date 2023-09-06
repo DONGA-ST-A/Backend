@@ -18,11 +18,11 @@ public class LoginService implements UserDetailsService {
     private final MemberRepository memberRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessException(MEMBER_NOT_FOUND));
+    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+        Member member = memberRepository.findByUserId(userId).orElseThrow(() -> new BusinessException(MEMBER_NOT_FOUND));
 
         return org.springframework.security.core.userdetails.User.builder()
-                .username(member.getEmail())
+                .username(member.getUserId())
                 .password(member.getPassword())
                 .build();
     }
