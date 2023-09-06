@@ -7,8 +7,8 @@ public record SignUpRequestDto(String userId, String password, String email, Str
     public Member toEntity() {
         return Member.builder()
                 .userId(userId)
-                .email(email)
                 .password(password)
+                .email(email)
                 .name(name)
                 .build();
     }

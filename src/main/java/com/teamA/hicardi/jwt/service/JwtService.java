@@ -39,7 +39,7 @@ public class JwtService {
 
     private static final String ACCESS_TOKEN_SUBJECT = "AccessToken";
     private static final String REFRESH_TOKEN_SUBJECT = "RefreshToken";
-    private static final String EMAIL_CLAIM = "email";
+    private static final String ID_CLAIM = "userId";
     private static final String BEARER = "Bearer ";
 
     private final RedisTemplate<String, String> redisTemplate;
@@ -48,24 +48,24 @@ public class JwtService {
     /**
      * AccessToken 생성 메소드
      */
-    public String createAccessToken(String email) {
+    public String createAccessToken(String userId) {
         Date now = new Date();
         return JWT.create()
                 .withSubject(ACCESS_TOKEN_SUBJECT)
                 .withExpiresAt(new Date(now.getTime() + accessTokenExpirationPeriod)) // 토큰 만료 시간 설정
-                .withClaim(EMAIL_CLAIM, email)
+                .withClaim(ID_CLAIM, userId)
                 .sign(Algorithm.HMAC512(secretKey));
     }
 
     /**
      * RefreshToken 생성 메소드
      */
-    public String createRefreshToken(String email) {
+    public String createRefreshToken(String userId) {
         Date now = new Date();
         return JWT.create()
                 .withSubject(REFRESH_TOKEN_SUBJECT)
                 .withExpiresAt(new Date(now.getTime() + refreshTokenExpirationPeriod))
-                .withClaim(EMAIL_CLAIM, email)
+                .withClaim(ID_CLAIM, userId)
                 .sign(Algorithm.HMAC512(secretKey));
     }
 
@@ -124,14 +124,14 @@ public class JwtService {
     }
 
     /**
-     * AccessToken에서 Email 추출 -> 유효하지 않다면 빈 Optional 객체 반환
+     * AccessToken에서 userId 추출 -> 유효하지 않다면 빈 Optional 객체 반환
      */
-    public Optional<String> extractEmail(String token) {
+    public Optional<String> extractUserId(String token) {
         try {
             return Optional.ofNullable(JWT.require(Algorithm.HMAC512(secretKey))
                     .build()
                     .verify(token)
-                    .getClaim(EMAIL_CLAIM)
+                    .getClaim(ID_CLAIM)
                     .asString());
         } catch (Exception e) {
             log.error("토큰이 유효하지 않습니다.");
@@ -156,8 +156,8 @@ public class JwtService {
     /**
      * RefreshToken 저장(업데이트)
      */
-    public void updateRefreshToken(String email, String refreshToken) {
-        redisUtil.set(email, refreshToken, refreshTokenExpirationPeriod);
+    public void updateRefreshToken(String userId, String refreshToken) {
+        redisUtil.set(userId, refreshToken, refreshTokenExpirationPeriod);
     }
 
     /**

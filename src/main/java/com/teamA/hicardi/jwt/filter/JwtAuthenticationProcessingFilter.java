@@ -71,9 +71,9 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
         String refreshToken = jwtService.extractRefreshToken(request);
         if (StringUtils.hasText(accessToken) && jwtService.isTokenValid(refreshToken)) {
             log.info("AccessToken 재발급");
-            String email = jwtService.extractEmail(refreshToken).orElseThrow(() -> new TokenException(INVALID_TOKEN));
-            if (isRefreshTokenMatch(email, refreshToken)) {
-                reIssueRefreshAndAccessToken(response, refreshToken, email);
+            String userId = jwtService.extractUserId(refreshToken).orElseThrow(() -> new TokenException(INVALID_TOKEN));
+            if (isRefreshTokenMatch(userId, refreshToken)) {
+                reIssueRefreshAndAccessToken(response, refreshToken, userId);
             }
             filterChain.doFilter(request, response);
             return;
@@ -86,12 +86,12 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
     /**
      * AccessToken, RefreshToken 재발급 + 인증 + 응답 헤더에 보내기
      */
-    private void reIssueRefreshAndAccessToken(HttpServletResponse response, String refreshToken, String email) {
-        String newAccessToken = jwtService.createAccessToken(email);
-        String newRefreshToken = jwtService.createRefreshToken(email);
+    private void reIssueRefreshAndAccessToken(HttpServletResponse response, String refreshToken, String userId) {
+        String newAccessToken = jwtService.createAccessToken(userId);
+        String newRefreshToken = jwtService.createRefreshToken(userId);
         getAuthentication(newAccessToken);
-        redisUtil.delete(email);
-        jwtService.updateRefreshToken(email, newRefreshToken);
+        redisUtil.delete(userId);
+        jwtService.updateRefreshToken(userId, newRefreshToken);
         jwtService.sendAccessToken(response, newAccessToken);
         jwtService.sendRefreshToken(response, newRefreshToken);
         log.info("AccessToken, RefreshToken 재발급 완료");
@@ -100,8 +100,8 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
     /**
      * AccessToken 재발급 + 인증 메소드 + 응답 헤더에 보내기
      */
-    private void reIssueAccessToken(HttpServletResponse response, String refreshToken, String email) {
-        String newAccessToken = jwtService.createAccessToken(email);
+    private void reIssueAccessToken(HttpServletResponse response, String refreshToken, String userId) {
+        String newAccessToken = jwtService.createAccessToken(userId);
         jwtService.sendAccessAndRefreshToken(response, newAccessToken, refreshToken);
         getAuthentication(newAccessToken);
         log.info("AccessToken 인증 완료");
@@ -110,9 +110,9 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
     /**
      * RefreshToken 검증 메소드
      */
-    public boolean isRefreshTokenMatch(String email, String refreshToken) {
+    public boolean isRefreshTokenMatch(String userId, String refreshToken) {
         log.info("RefreshToken 검증");
-        if (redisUtil.get(email).equals(refreshToken)) {
+        if (redisUtil.get(userId).equals(refreshToken)) {
             return true;
         }
         throw new TokenException(INVALID_TOKEN);
@@ -124,8 +124,8 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
      */
     public void getAuthentication(String accessToken) {
         log.info("인증 처리 메소드 getAuthentication() 호출");
-        jwtService.extractEmail(accessToken)
-                .ifPresent(email -> memberRepository.findByEmail(email)
+        jwtService.extractUserId(accessToken)
+                .ifPresent(userId -> memberRepository.findByUserId(userId)
                         .ifPresent(this::saveAuthentication));
     }
 
@@ -141,7 +141,7 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
         }
 
         UserDetails userDetailsUser = org.springframework.security.core.userdetails.User.builder()
-                .username(member.getEmail())
+                .username(member.getUserId())
                 .password(password)
                 .build();
 
