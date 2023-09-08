@@ -74,7 +74,7 @@ public class JwtService {
      */
     public void sendAccessToken(HttpServletResponse response, String accessToken) {
         response.setStatus(HttpServletResponse.SC_OK);
-        response.setHeader(accessHeader, accessToken);
+        setAccessTokenHeader(response, accessToken);
         log.info("sendAccessToken 실행");
     }
 
