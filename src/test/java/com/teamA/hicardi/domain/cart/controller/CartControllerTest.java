@@ -20,7 +20,9 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.teamA.hicardi.domain.cart.service.CartService;
 import com.teamA.hicardi.domain.cartItem.dto.CartItemAddRequestDto;
-import com.teamA.hicardi.domain.utils.TestUserArgumentResolver;
+import com.teamA.hicardi.domain.item.entity.Item;
+import com.teamA.hicardi.domain.item.entity.SellStatus;
+import com.teamA.hicardi.utils.TestUserArgumentResolver;
 
 @ExtendWith(MockitoExtension.class)
 class CartControllerTest {
@@ -45,10 +47,8 @@ class CartControllerTest {
 	@Test
 	@DisplayName("장바구니 상품 추가 성공")
 	void cartItemAddSuccess() throws Exception {
-		CartItemAddRequestDto cartItemAddRequestDto = CartItemAddRequestDto.builder()
-			.itemId(1L)
-			.count(1)
-			.build();
+
+		CartItemAddRequestDto cartItemAddRequestDto = new CartItemAddRequestDto(1L,  1);
 
 		ResultActions result = mockMvc.perform(MockMvcRequestBuilders.post("/api/cart/add")
 				.contentType(MediaType.APPLICATION_JSON)

@@ -1,4 +1,4 @@
-package com.teamA.hicardi.domain.utils;
+package com.teamA.hicardi.utils;
 
 import static org.mockito.BDDMockito.*;
 
