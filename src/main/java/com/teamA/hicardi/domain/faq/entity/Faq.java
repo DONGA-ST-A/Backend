@@ -2,10 +2,7 @@ package com.teamA.hicardi.domain.faq.entity;
 
 import com.teamA.hicardi.common.entity.BaseTimeEntity;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -23,4 +20,11 @@ public class Faq extends BaseTimeEntity {
     private String question;
 
     private String answer;
+
+    @Builder
+    public Faq(Category category, String question, String answer) {
+        this.category = category;
+        this.question = question;
+        this.answer = answer;
+    }
 }
