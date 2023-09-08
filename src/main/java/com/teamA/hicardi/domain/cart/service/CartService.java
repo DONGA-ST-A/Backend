@@ -43,7 +43,7 @@ public class CartService {
 
 		Long memberId = findMember.getId();
 
-		boolean existsCart = cartRepository.existsCartByMember_Id(memberId);
+		boolean existsCart = cartRepository.existsCartByMemberId(memberId);
 
 		// 장바구니가 존재하지 않을때 장바구니 생성
 		if(!existsCart){
@@ -54,7 +54,7 @@ public class CartService {
 		}
 
 		// 해당 회원의 장바구니를 가져와서 상품을 추가
-		Cart findCart = cartRepository.findCartByMember_Id(memberId)
+		Cart findCart = cartRepository.findByMemberId(memberId)
 			.orElseThrow(() -> new BusinessException(ErrorCode.CART_NOT_FOUND));
 		Item findItem = itemRepository.findById(cartItemAddRequestDto.itemId())
 			.orElseThrow(() -> new BusinessException(ErrorCode.ITEM_NOT_FOUND));
