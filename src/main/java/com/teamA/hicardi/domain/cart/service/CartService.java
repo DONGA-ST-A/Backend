@@ -17,6 +17,8 @@ import com.teamA.hicardi.domain.item.entity.Item;
 import com.teamA.hicardi.domain.item.repository.ItemRepository;
 import com.teamA.hicardi.domain.member.entity.Member;
 import com.teamA.hicardi.domain.member.repository.MemberRepository;
+import com.teamA.hicardi.error.ErrorCode;
+import com.teamA.hicardi.error.exception.custom.BusinessException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -37,11 +39,11 @@ public class CartService {
 	public void addCartItem(CartItemAddRequestDto cartItemAddRequestDto, String userId) {
 
 		Member findMember =  memberRepository.findByUserId(userId)
-			.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
+			.orElseThrow(() -> new BusinessException(ErrorCode.MEMBER_NOT_FOUND));
 
 		Long memberId = findMember.getId();
 
-		boolean existsCart = cartRepository.existsCartByMember_Id(memberId);
+		boolean existsCart = cartRepository.existsCartByMemberId(memberId);
 
 		// 장바구니가 존재하지 않을때 장바구니 생성
 		if(!existsCart){
@@ -52,17 +54,12 @@ public class CartService {
 		}
 
 		// 해당 회원의 장바구니를 가져와서 상품을 추가
-		Cart findCart = cartRepository.findCartByMember_Id(memberId)
-			.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 장바구니입니다."));
+		Cart findCart = cartRepository.findByMemberId(memberId)
+			.orElseThrow(() -> new BusinessException(ErrorCode.CART_NOT_FOUND));
+		Item findItem = itemRepository.findById(cartItemAddRequestDto.itemId())
+			.orElseThrow(() -> new BusinessException(ErrorCode.ITEM_NOT_FOUND));
 
-		Item findItem = itemRepository.findById(cartItemAddRequestDto.getItemId())
-			.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상품입니다."));
-
-		CartItem cartItem = CartItem.builder()
-			.cart(findCart)
-			.item(findItem)
-			.count(cartItemAddRequestDto.getCount())
-			.build();
+		CartItem cartItem = cartItemAddRequestDto.toEntity(findCart, findItem);
 
 		cartItemRepository.save(cartItem);
 	}

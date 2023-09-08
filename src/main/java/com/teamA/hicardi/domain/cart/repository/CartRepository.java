@@ -8,6 +8,6 @@ import com.teamA.hicardi.domain.cart.entity.Cart;
 import com.teamA.hicardi.domain.member.entity.Member;
 
 public interface CartRepository extends JpaRepository<Cart, Long> {
-	Boolean existsCartByMember_Id(Long memberId);
-	Optional<Cart> findCartByMember_Id(Long memberId);
+	Boolean existsCartByMemberId(Long memberId);
+	Optional<Cart> findByMemberId(Long memberId);
 }
