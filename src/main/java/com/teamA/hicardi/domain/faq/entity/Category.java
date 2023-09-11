@@ -7,7 +7,7 @@ import com.teamA.hicardi.error.exception.custom.BusinessException;
 import java.util.stream.Stream;
 
 public enum Category {
-    BATTERY, EXERCISE;   // 추가 예정
+    USE, DELIVERY, DEVICE, ETC;
 
     @JsonCreator
     public static Category create(String requestValue) {
