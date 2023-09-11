@@ -1,7 +1,7 @@
 package com.teamA.hicardi.domain.faq.service;
 
 import com.teamA.hicardi.domain.faq.dto.request.FaqSaveRequestDto;
-import com.teamA.hicardi.domain.faq.dto.response.FaqGetAllResponseDto;
+import com.teamA.hicardi.domain.faq.dto.response.FaqGetResponseDto;
 import com.teamA.hicardi.domain.faq.entity.Category;
 import com.teamA.hicardi.domain.faq.entity.Faq;
 import com.teamA.hicardi.domain.faq.repository.FaqRepository;
@@ -26,9 +26,16 @@ public class FaqService {
         faqRepository.save(faq);
     }
 
-    public Page<FaqGetAllResponseDto> getAllFaqs(Pageable pageable) {
+    public Page<FaqGetResponseDto> getAllFaqs(Pageable pageable) {
         Page<Faq> faqs = faqRepository.findAll(pageable);
-        Page<FaqGetAllResponseDto> response = faqs.map(f -> FaqGetAllResponseDto.from(f));
+        Page<FaqGetResponseDto> response = faqs.map(f -> FaqGetResponseDto.from(f));
+        return response;
+    }
+
+    public Page<FaqGetResponseDto> getCategoryFaqs(String search, Pageable pageable) {
+        Category category = Category.create(search);
+        Page<Faq> faqs = faqRepository.findAllByCategory(category, pageable);
+        Page<FaqGetResponseDto> response = faqs.map(f -> FaqGetResponseDto.from(f));
         return response;
     }
 }
