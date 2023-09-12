@@ -2,6 +2,7 @@ package com.teamA.hicardi.domain.item.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.teamA.hicardi.domain.item.dto.response.ItemGetAllResponseDto;
+import com.teamA.hicardi.domain.item.dto.response.ItemGetResponseDto;
 import com.teamA.hicardi.domain.item.service.ItemService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
@@ -65,5 +67,22 @@ class ItemControllerTest {
         //then
         result.andExpect(status().isOk());
         verify(itemService, times(1)).getAllItems(any());
+    }
+
+    @Test
+    void 상품_상세_조회() throws Exception{
+        List<String> images = new ArrayList<>();
+        images.add("1.svg");
+        images.add("2.svg");
+        ItemGetResponseDto response = new ItemGetResponseDto(1L, "하이카디플러스", "하이카디", Collections.singletonList("SmartPatch,DeviceBody"), "1.svg", 10000, 100, "SELL", images);
+
+        given(itemService.getItem(any())).willReturn(response);
+        ResultActions result = mockMvc.perform(
+            get("/items/1")
+        );
+
+        result.andExpect(status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+        verify(itemService, times(1)).getItem(any());
     }
 }
