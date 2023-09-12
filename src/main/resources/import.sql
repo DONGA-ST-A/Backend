@@ -17,3 +17,12 @@ INSERT INTO Item (id, name, subname, tags, previewImage, price, stock, status, c
 INSERT INTO Item (id, name, subname, tags, previewImage, price, stock, status, createdDate, modifiedDate) VALUES (8, '원격 판독권', '부정맥 전문의 원격 판독 서비스', 'RemoteReading,AdditionalService', 'https://hicardi.s3.ap-northeast-2.amazonaws.com/preview8.svg', null, 100, 'SELL', now(), now());
 INSERT INTO Item (id, name, subname, tags, previewImage, price, stock, status, createdDate, modifiedDate) VALUES (9, '갤럭시 A13', '하이카디 서비스에 필요한 스마트폰(미개통)', 'SmartPhone,AdditionalItem', 'https://hicardi.s3.ap-northeast-2.amazonaws.com/preview9.svg', 275000, 100, 'SOLD_OUT', now(), now());
 
+INSERT INTO ItemImage(id, image, itemId, createdDate, modifiedDate) VALUES (1, 'https://hicardi.s3.ap-northeast-2.amazonaws.com/itemImage1.svg', 1, now(), now());
+INSERT INTO ItemImage(id, image, itemId, createdDate, modifiedDate) VALUES (2, 'https://hicardi.s3.ap-northeast-2.amazonaws.com/itemImage2.svg', 1, now(), now());
+INSERT INTO ItemImage(id, image, itemId, createdDate, modifiedDate) VALUES (3, 'https://hicardi.s3.ap-northeast-2.amazonaws.com/itemImage3.svg', 1, now(), now());
+INSERT INTO ItemImage(id, image, itemId, createdDate, modifiedDate) VALUES (4, 'https://hicardi.s3.ap-northeast-2.amazonaws.com/itemImage4.svg', 1, now(), now());
+INSERT INTO ItemImage(id, image, itemId, createdDate, modifiedDate) VALUES (5, 'https://hicardi.s3.ap-northeast-2.amazonaws.com/itemImage5.svg', 1, now(), now());
+INSERT INTO ItemImage(id, image, itemId, createdDate, modifiedDate) VALUES (6, 'https://hicardi.s3.ap-northeast-2.amazonaws.com/itemImage6.svg', 1, now(), now());
+INSERT INTO ItemImage(id, image, itemId, createdDate, modifiedDate) VALUES (7, 'https://hicardi.s3.ap-northeast-2.amazonaws.com/itemImage7.svg', 1, now(), now());
+
+
