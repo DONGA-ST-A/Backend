@@ -73,8 +73,8 @@ class FaqControllerTest {
         //given
         PageRequest pageable = PageRequest.of(0, 5);
         List<FaqGetResponseDto> dtos = new ArrayList<>();
-        dtos.add(new FaqGetResponseDto(1L, Category.USE, "사용 질문", "사용 대답"));
-        dtos.add(new FaqGetResponseDto(2L, Category.DEVICE, "기기 질문", "기기 대답"));
+        dtos.add(new FaqGetResponseDto(1L, "사용법", "사용 질문", "사용 대답"));
+        dtos.add(new FaqGetResponseDto(2L, "기기", "기기 질문", "기기 대답"));
         Page<FaqGetResponseDto> response = new PageImpl<>(dtos, pageable, 2);
 
         //when
@@ -94,20 +94,41 @@ class FaqControllerTest {
         //given
         PageRequest pageable = PageRequest.of(0, 5);
         List<FaqGetResponseDto> dtos = new ArrayList<>();
-        dtos.add(new FaqGetResponseDto(1L, Category.USE, "사용 질문1", "사용 대답1"));
-        dtos.add(new FaqGetResponseDto(2L, Category.USE, "사용 질문2", "사용 대답2"));
+        dtos.add(new FaqGetResponseDto(1L, "사용법", "사용 질문1", "사용 대답1"));
+        dtos.add(new FaqGetResponseDto(2L, "사용법", "사용 질문2", "사용 대답2"));
         Page<FaqGetResponseDto> response = new PageImpl<>(dtos, pageable, 2);
 
         //when
         given(faqService.getCategoryFaqs(anyString(), any())).willReturn(response);
         ResultActions result = mockMvc.perform(
-                get("/faqs/search")
-                        .param("category", "USE")
+                get("/faqs/category")
+                        .param("search", "USE")
         );
 
         //then
         result.andExpect(status().isOk());
         verify(faqService, times(1)).getCategoryFaqs(anyString(), any());
+    }
+
+    @Test
+    void FAQ_키워드_검색() throws Exception {
+        //given
+        PageRequest pageable = PageRequest.of(0, 5);
+        List<FaqGetResponseDto> dtos = new ArrayList<>();
+        dtos.add(new FaqGetResponseDto(1L, "사용법", "배터리는 어떻게 교체하나요?", "하이카디 패치의 배터리는 교환이 불가능한 재충전식 내장배터리로 구성되어 있습니다. 방전 후 재충전을 하실 수 있는 충전기를 제공해 드립니다."));
+        dtos.add(new FaqGetResponseDto(2L, "기기", "구매한 패치에 이상이 있습니다.", "패치에 이상이 있으실 경우 1대1 문의를 이용해 주세요."));
+        Page<FaqGetResponseDto> response = new PageImpl<>(dtos, pageable, 2);
+
+        //when
+        given(faqService.searchFaq(anyString(), any())).willReturn(response);
+        ResultActions result = mockMvc.perform(
+                get("/faqs/keyword")
+                        .param("search", "패치")
+        );
+
+        //then
+        result.andExpect(status().isOk());
+        verify(faqService, times(1)).searchFaq(anyString(), any());
     }
 
 }
