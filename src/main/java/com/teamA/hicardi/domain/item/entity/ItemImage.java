@@ -1,5 +1,6 @@
 package com.teamA.hicardi.domain.item.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teamA.hicardi.common.entity.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -20,8 +21,7 @@ public class ItemImage extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT")
     private String image;
 
-    private String content;
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "itemId")
     private Item item;
