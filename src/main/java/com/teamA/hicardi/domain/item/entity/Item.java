@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.NumberFormat;
 
 import java.util.EnumSet;
 
@@ -21,9 +22,9 @@ public class Item extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
+    private String name;
 
-    private String subtitle;
+    private String subname;
 
     @Convert(converter = SetTagConverter.class)
     private EnumSet<Tag> tags;
@@ -38,9 +39,9 @@ public class Item extends BaseTimeEntity {
     private SellStatus status;
 
     @Builder
-    public Item(String title, String subtitle, EnumSet<Tag> tags, String previewImage, Integer price, Integer stock, SellStatus status) {
-        this.title = title;
-        this.subtitle = subtitle;
+    public Item(String name, String subname, EnumSet<Tag> tags, String previewImage, Integer price, Integer stock, SellStatus status) {
+        this.name = name;
+        this.subname = subname;
         this.tags = tags;
         this.previewImage = previewImage;
         this.price = price;
