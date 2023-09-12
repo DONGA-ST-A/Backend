@@ -37,7 +37,7 @@ public class ItemService {
 		Item item = itemRepository.findById(itemId)
 			.orElseThrow(() -> new BusinessException(ErrorCode.ITEM_NOT_FOUND));
 
-		List<ItemImage> itemImages = itemImageRepository.findItemImagesByItemId(itemId);
+		List<ItemImage> itemImages = itemImageRepository.findByItemId(itemId);
 		List<String> images = itemImages.stream()
 			.map(ItemImage::getImage)
 			.toList();
