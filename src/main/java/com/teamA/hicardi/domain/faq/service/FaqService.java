@@ -38,4 +38,10 @@ public class FaqService {
         Page<FaqGetResponseDto> response = faqs.map(f -> FaqGetResponseDto.from(f));
         return response;
     }
+
+    public Page<FaqGetResponseDto> searchFaq(String search, Pageable pageable) {
+        Page<Faq> faqs = faqRepository.findAllBySearch(search, pageable);
+        Page<FaqGetResponseDto> response = faqs.map(f -> FaqGetResponseDto.from(f));
+        return response;
+    }
 }
