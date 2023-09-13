@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -84,5 +85,26 @@ class ItemControllerTest {
         result.andExpect(status().isOk())
                 .andDo(MockMvcResultHandlers.print());
         verify(itemService, times(1)).getItem(any());
+    }
+
+    @Test
+    void 상품_태그로_상품_조회() throws Exception {
+        //given
+        PageRequest pageable = PageRequest.of(0, 5);
+        List<ItemsGetResponseDto> dtos = new ArrayList<>();
+        dtos.add(new ItemsGetResponseDto(1L, "하이카디플러스", "하이카디", Collections.singletonList("SmartPatch,DeviceBody"), "1.svg", 10000, 100, "SELL"));
+        dtos.add(new ItemsGetResponseDto(1L, "하이카디플러스2", "하이카디2", Collections.singletonList("SmartPatch,DeviceBody"), "2.svg", 20000, 200, "SELL"));
+        Page<ItemsGetResponseDto> response = new PageImpl<>(dtos, pageable, 2);
+
+        //when
+        given(itemService.searchTagItems(anyString(), any())).willReturn(response);
+        ResultActions result = mockMvc.perform(
+                get("/items/tags")
+                        .param("search", "Smart Patch")
+        );
+
+        //then
+        result.andExpect(status().isOk());
+        verify(itemService, times(1)).searchTagItems(anyString(), any());
     }
 }
