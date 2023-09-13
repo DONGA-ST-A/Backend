@@ -43,7 +43,6 @@ public class FaqController {
     }
 
     @Operation(summary = "FAQ 전체 조회", description = "FAQ 전체를 조회합니다.",
-            security = { @SecurityRequirement(name = "bearer-key") },
             responses = {
                     @ApiResponse(responseCode = "200", description = "FAQ 전체 조회 성공")
             })
@@ -54,7 +53,6 @@ public class FaqController {
     }
 
     @Operation(summary = "FAQ 카테고리(USE, DELIVERY, DEVICE, ETC)별 조회", description = "FAQ를 카테고리(USE, DELIVERY, DEVICE, ETC)별로 조회합니다.",
-            security = { @SecurityRequirement(name = "bearer-key") },
             responses = {
                     @ApiResponse(responseCode = "200", description = "FAQ 카테고리별 조회 성공")
                     , @ApiResponse(responseCode = "400", description = "1. 카테고리를 입력해야 합니다. \t\n 2. 잘못된 카테고리입니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
@@ -69,7 +67,6 @@ public class FaqController {
     }
 
     @Operation(summary = "FAQ 키워드 검색", description = "FAQ를 키워드로 검색합니다.",
-            security = { @SecurityRequirement(name = "bearer-key") },
             responses = {
                     @ApiResponse(responseCode = "200", description = "FAQ 키워드 검색 성공")
                     , @ApiResponse(responseCode = "400", description = "검색어를 입력해야 합니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
