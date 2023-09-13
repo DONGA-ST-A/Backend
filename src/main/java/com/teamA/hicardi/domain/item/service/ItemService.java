@@ -5,6 +5,7 @@ import com.teamA.hicardi.domain.item.dto.response.ItemsGetResponseDto;
 import com.teamA.hicardi.domain.item.entity.Item;
 import com.teamA.hicardi.domain.item.entity.ItemImage;
 import com.teamA.hicardi.domain.item.entity.ItemTag;
+import com.teamA.hicardi.domain.item.entity.Tag;
 import com.teamA.hicardi.domain.item.repository.ItemImageRepository;
 import com.teamA.hicardi.domain.item.repository.ItemRepository;
 import com.teamA.hicardi.domain.item.repository.ItemTagRepository;
@@ -47,5 +48,12 @@ public class ItemService {
 			.toList();
 
 		return ItemGetResponseDto.from(item, images, itemTags);
+	}
+
+	public Page<ItemsGetResponseDto> searchTagItems(String search, Pageable pageable) {
+		Tag tag = Tag.create(search);
+		Page<Item> items = itemTagRepository.findAllByTag(tag, pageable);
+		Page<ItemsGetResponseDto> response = items.map(i -> ItemsGetResponseDto.from(i, itemTagRepository.findAllByItem(i)));
+		return response;
 	}
 }

@@ -14,10 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -47,5 +44,16 @@ public class ItemController {
     public ResponseEntity<ItemGetResponseDto> getItem(@PathVariable Long itemId){
         ItemGetResponseDto itemGetResponseDto = itemService.getItem(itemId);
         return ResponseEntity.ok(itemGetResponseDto);
+    }
+
+    @Operation(summary = "상품 태그로 상품 조회", description = "상품 태그로 상품을 조회합니다.",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "상품 태그로 상품 조회 성공"),
+                    @ApiResponse(responseCode = "400", description = "잘못된 태그입니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+            })
+    @GetMapping("/tags")
+    public ResponseEntity<PageResponseDto> searchTagItems(@RequestParam String search, Pageable pageable) {
+        Page<ItemsGetResponseDto> response = itemService.searchTagItems(search, pageable);
+        return PageResponseDto.of(response);
     }
 }
