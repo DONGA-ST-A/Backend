@@ -28,7 +28,6 @@ public class ItemController {
     private final ItemService itemService;
 
     @Operation(summary = "상품 목록 조회", description = "상품 목록을 조회합니다.",
-            security = { @SecurityRequirement(name = "bearer-key") },
             responses = {
                     @ApiResponse(responseCode = "200", description = "상품 목록 조회 성공")
             })
@@ -39,7 +38,6 @@ public class ItemController {
     }
 
     @Operation(summary = "상품 상세 조회", description = "상품을 조회합니다.",
-        security = { @SecurityRequirement(name = "bearer-key") },
         responses = {
             @ApiResponse(responseCode = "200", description = "상품 상세 조회 성공"),
             @ApiResponse(responseCode = "404", description = "해당 상품을 찾을 수 없습니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
