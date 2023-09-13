@@ -102,7 +102,7 @@ class FaqControllerTest {
         given(faqService.getCategoryFaqs(anyString(), any())).willReturn(response);
         ResultActions result = mockMvc.perform(
                 get("/faqs/category")
-                        .param("search", "USE")
+                        .param("search", "사용법")
         );
 
         //then
