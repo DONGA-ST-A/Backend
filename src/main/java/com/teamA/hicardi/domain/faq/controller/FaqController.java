@@ -52,7 +52,7 @@ public class FaqController {
         return PageResponseDto.of(response);
     }
 
-    @Operation(summary = "FAQ 카테고리(USE, DELIVERY, DEVICE, ETC)별 조회", description = "FAQ를 카테고리(USE, DELIVERY, DEVICE, ETC)별로 조회합니다.",
+    @Operation(summary = "FAQ 카테고리(사용법, 기기, 배송, 기타)별 조회", description = "FAQ를 카테고리(사용법, 기기, 배송, 기타)별로 조회합니다.",
             responses = {
                     @ApiResponse(responseCode = "200", description = "FAQ 카테고리별 조회 성공")
                     , @ApiResponse(responseCode = "400", description = "1. 카테고리를 입력해야 합니다. \t\n 2. 잘못된 카테고리입니다.", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
