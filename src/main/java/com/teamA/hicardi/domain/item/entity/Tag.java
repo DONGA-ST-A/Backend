@@ -26,7 +26,7 @@ public enum Tag {
     @JsonCreator
     public static Tag create(String requestValue) {
         return Stream.of(values())
-                .filter(v -> v.toString().equalsIgnoreCase(requestValue))
+                .filter(v -> v.desc.equalsIgnoreCase(requestValue))
                 .findFirst()
                 .orElseThrow(() -> new BusinessException(ErrorCode.INVALID_TAG));
     }
