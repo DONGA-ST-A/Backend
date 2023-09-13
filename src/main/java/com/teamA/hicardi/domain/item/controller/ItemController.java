@@ -1,7 +1,7 @@
 package com.teamA.hicardi.domain.item.controller;
 
 import com.teamA.hicardi.common.dto.PageResponseDto;
-import com.teamA.hicardi.domain.item.dto.response.ItemGetAllResponseDto;
+import com.teamA.hicardi.domain.item.dto.response.ItemsGetResponseDto;
 import com.teamA.hicardi.domain.item.dto.response.ItemGetResponseDto;
 import com.teamA.hicardi.domain.item.service.ItemService;
 import com.teamA.hicardi.error.dto.ErrorResponse;
@@ -10,7 +10,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +18,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,7 +34,7 @@ public class ItemController {
             })
     @GetMapping
     public ResponseEntity<PageResponseDto> getAllItems(Pageable pageable) {
-        Page<ItemGetAllResponseDto> response = itemService.getAllItems(pageable);
+        Page<ItemsGetResponseDto> response = itemService.getAllItems(pageable);
         return PageResponseDto.of(response);
     }
 

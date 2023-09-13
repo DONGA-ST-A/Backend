@@ -1,10 +1,13 @@
 package com.teamA.hicardi.domain.item.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.teamA.hicardi.error.ErrorCode;
+import com.teamA.hicardi.error.exception.custom.BusinessException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.ToString;
 
-@ToString
+import java.util.stream.Stream;
+
 @AllArgsConstructor
 @Getter
 public enum Tag {
@@ -19,4 +22,12 @@ public enum Tag {
     SmartPhone("스마트폰");
 
     private final String desc;
+
+    @JsonCreator
+    public static Tag create(String requestValue) {
+        return Stream.of(values())
+                .filter(v -> v.toString().equalsIgnoreCase(requestValue))
+                .findFirst()
+                .orElseThrow(() -> new BusinessException(ErrorCode.INVALID_TAG));
+    }
 }

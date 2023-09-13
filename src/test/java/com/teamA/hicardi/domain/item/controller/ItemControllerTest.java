@@ -1,7 +1,7 @@
 package com.teamA.hicardi.domain.item.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.teamA.hicardi.domain.item.dto.response.ItemGetAllResponseDto;
+import com.teamA.hicardi.domain.item.dto.response.ItemsGetResponseDto;
 import com.teamA.hicardi.domain.item.dto.response.ItemGetResponseDto;
 import com.teamA.hicardi.domain.item.service.ItemService;
 import org.junit.jupiter.api.BeforeEach;
@@ -53,10 +53,10 @@ class ItemControllerTest {
     void 상품_목록_조회() throws Exception {
         //given
         PageRequest pageable = PageRequest.of(0, 5);
-        List<ItemGetAllResponseDto> dtos = new ArrayList<>();
-        dtos.add(new ItemGetAllResponseDto(1L, "하이카디플러스", "하이카디", Collections.singletonList("SmartPatch,DeviceBody"), "1.svg", 10000, 100, "SELL"));
-        dtos.add(new ItemGetAllResponseDto(1L, "하이카디플러스2", "하이카디2", Collections.singletonList("SmartPatch,DeviceBody"), "2.svg", 20000, 200, "SELL"));
-        Page<ItemGetAllResponseDto> response = new PageImpl<>(dtos, pageable, 2);
+        List<ItemsGetResponseDto> dtos = new ArrayList<>();
+        dtos.add(new ItemsGetResponseDto(1L, "하이카디플러스", "하이카디", Collections.singletonList("SmartPatch,DeviceBody"), "1.svg", 10000, 100, "SELL"));
+        dtos.add(new ItemsGetResponseDto(1L, "하이카디플러스2", "하이카디2", Collections.singletonList("SmartPatch,DeviceBody"), "2.svg", 20000, 200, "SELL"));
+        Page<ItemsGetResponseDto> response = new PageImpl<>(dtos, pageable, 2);
 
         //when
         given(itemService.getAllItems(any())).willReturn(response);
