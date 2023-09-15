@@ -1,5 +1,7 @@
 package com.teamA.hicardi.domain.notice.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -52,8 +54,8 @@ public class NoticeController {
 	}
 
 	@GetMapping("/{noticeId}")
-	public ResponseEntity<NoticeGetResponseDto> getNotice(@PathVariable Long noticeId) {
-		NoticeGetResponseDto response = noticeService.getNotice(noticeId);
+	public ResponseEntity<List<NoticeGetResponseDto>> getNotice(@PathVariable Long noticeId) {
+		List<NoticeGetResponseDto> response = noticeService.getNotice(noticeId);
 		return ResponseDto.ok(response);
 	}
 }
