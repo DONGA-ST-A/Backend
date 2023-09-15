@@ -104,9 +104,11 @@ public class NoticeControllerTest {
 	@Test
 	void 공지사항_상세_조회() throws Exception{
 
-		NoticeGetResponseDto response = new NoticeGetResponseDto(1L, "DATA", "자료", "내용2", "첨부파일2", true, LocalDate.now());
+		List<NoticeGetResponseDto> dtos = new ArrayList<>();
+		dtos.add(new NoticeGetResponseDto(1L, "DATA", "자료", "내용2", "첨부파일2", true, LocalDate.now()));
+		dtos.add(new NoticeGetResponseDto(2L, "DATA", "자료", "내용2", "첨부파일2", true, LocalDate.now()));
 
-		given(noticeService.getNotice(any())).willReturn(response);
+		given(noticeService.getNotice(any())).willReturn(dtos);
 		ResultActions result = mockMvc.perform(
 			get("/notices/1")
 		);
