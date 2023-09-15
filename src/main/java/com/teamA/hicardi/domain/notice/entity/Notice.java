@@ -17,11 +17,16 @@ public class Notice extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String writer;
-
     private String title;
 
     @Column(columnDefinition = "TEXT")
     private String content;
+
+    private Boolean isTop;
+
+    private String File;
+
+    @Enumerated(EnumType.STRING)
+    private NoticeCategory category;
 
 }
