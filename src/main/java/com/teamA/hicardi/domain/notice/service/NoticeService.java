@@ -30,4 +30,10 @@ public class NoticeService {
 		Page<NoticeGetResponseDto> response = notices.map(f -> NoticeGetResponseDto.from(f));
 		return response;
 	}
+
+	public Page<NoticeGetResponseDto> searchNotice(String search, Pageable pageable) {
+		Page<Notice> notices = noticeRepository.findAllBySearch(search, pageable);
+		Page<NoticeGetResponseDto> response = notices.map(f -> NoticeGetResponseDto.from(f));
+		return response;
+	}
 }

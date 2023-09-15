@@ -39,4 +39,13 @@ public class NoticeController {
 		Page<NoticeGetResponseDto> response = noticeService.getCategoryNotices(search, pageable);
 		return PageResponseDto.of(response);
 	}
+
+	@GetMapping("/keyword")
+	public ResponseEntity<PageResponseDto> searchFaq(@RequestParam String search, Pageable pageable) {
+		if (StringUtils.isEmpty(search)) {
+			throw new BusinessException(ErrorCode.WRONG_SEARCH);
+		}
+		Page<NoticeGetResponseDto> response = noticeService.searchNotice(search, pageable);
+		return PageResponseDto.of(response);
+	}
 }
