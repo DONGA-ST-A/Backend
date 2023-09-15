@@ -7,7 +7,7 @@ INSERT INTO Faq (id, category, question, answer, createdDate, modifiedDate) VALU
 INSERT INTO Faq (id, category, question, answer, createdDate, modifiedDate) VALUES (4, 'DELIVERY', '배송 완료라고 문자가 왔는데 6시간이 지난 지금까지도 배송되지 않았습니다.', '1대1 문의를 남겨주시면 택배기사님과 연락 후 조치를 취해드리겠습니다.', now(), now());
 INSERT INTO Faq (id, category, question, answer, createdDate, modifiedDate) VALUES (5, 'USE', '만 7세 평균 체중 남아에게 사용해도 괜찮을까요?', '사용해도 괜찮습니다.', now(), now());
 
-INSERT INTO Item (id, name, subname, previewImage, price, stock, status, createdDate, modifiedDate) VALUES (1, '하이카디플러스 HiCardi+', '편리하게 심전도 측정, 전송 및 분석', 'https://hicardi.s3.ap-northeast-2.amazonaws.com/preview1.svg', 2046000, 100, 'SELL', now(), now());
+INSERT INTO Item (id, name, subname, previewImage, price, stock, status, createdDate, modifiedDate) VALUES (1, '하이카디플러스 HiCardi+', '편리하게 심전도 측정, 전송 및 분석. 더 나은 삶을 위한 스마트한 솔루션 HiCardi+', 'https://hicardi.s3.ap-northeast-2.amazonaws.com/preview1.svg', 2046000, 100, 'SELL', now(), now());
 INSERT INTO Item (id, name, subname, previewImage, price, stock, status, createdDate, modifiedDate) VALUES (2, '하이카디플러스 HiCardi+ H100', '메모리 내장형 제품', 'https://hicardi.s3.ap-northeast-2.amazonaws.com/preview2.svg', 1320000, 100, 'SELL', now(), now());
 INSERT INTO Item (id, name, subname, previewImage, price, stock, status, createdDate, modifiedDate) VALUES (3, '하이카디 HiCardi', '편리하게 심전도 측정, 전송 및 분석', 'https://hicardi.s3.ap-northeast-2.amazonaws.com/preview3.svg', 1496000, 100, 'SELL', now(), now());
 INSERT INTO Item (id, name, subname, previewImage, price, stock, status, createdDate, modifiedDate) VALUES (4, '심전도 전극 리필, 소형 20매', 'ECG Electrodes - standard', 'https://hicardi.s3.ap-northeast-2.amazonaws.com/preview4.svg', 16500, 100, 'SELL', now(), now());
