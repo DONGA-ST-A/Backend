@@ -17,4 +17,8 @@ public interface NoticeRepository extends JpaRepository<Notice, Long> {
 
 	@Query("SELECT n FROM Notice n ORDER BY n.isTop DESC, n.createdDate DESC")
 	Page<Notice> findAllOrderedByIsTopAndCreateDate(Pageable pageable);
+
+	@Query("SELECT n FROM Notice n " +
+		" WHERE n.title LIKE %:search% OR n.content LIKE %:search% ")
+	Page<Notice> findAllBySearch(@Param("search") String search, Pageable pageable);
 }
