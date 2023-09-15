@@ -5,10 +5,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.teamA.hicardi.domain.faq.dto.response.FaqGetResponseDto;
-import com.teamA.hicardi.domain.faq.entity.Faq;
 import com.teamA.hicardi.domain.notice.dto.response.NoticeGetResponseDto;
 import com.teamA.hicardi.domain.notice.entity.Notice;
+import com.teamA.hicardi.domain.notice.entity.NoticeCategory;
 import com.teamA.hicardi.domain.notice.repository.NoticeRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -21,6 +20,19 @@ public class NoticeService {
 	private final NoticeRepository noticeRepository;
 	public Page<NoticeGetResponseDto> getAllNotices(Pageable pageable) {
 		Page<Notice> notices = noticeRepository.findAllOrderedByIsTopAndCreateDate(pageable);
+		Page<NoticeGetResponseDto> response = notices.map(f -> NoticeGetResponseDto.from(f));
+		return response;
+	}
+
+	public Page<NoticeGetResponseDto> getCategoryNotices(String search, Pageable pageable) {
+		NoticeCategory category = NoticeCategory.create(search);
+		Page<Notice> notices = noticeRepository.findAllOrderedByIsTopAndCategory(category, pageable);
+		Page<NoticeGetResponseDto> response = notices.map(f -> NoticeGetResponseDto.from(f));
+		return response;
+	}
+
+	public Page<NoticeGetResponseDto> searchNotice(String search, Pageable pageable) {
+		Page<Notice> notices = noticeRepository.findAllBySearch(search, pageable);
 		Page<NoticeGetResponseDto> response = notices.map(f -> NoticeGetResponseDto.from(f));
 		return response;
 	}

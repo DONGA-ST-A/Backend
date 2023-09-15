@@ -63,4 +63,40 @@ public class NoticeControllerTest {
 		result.andExpect(status().isOk());
 		verify(noticeService, times(1)).getAllNotices(any());
 	}
+
+	@Test
+	void 공지사항_카테고리별_조회() throws Exception {
+		PageRequest pageable = PageRequest.of(0, 5);
+		List<NoticeGetResponseDto> dtos = new ArrayList<>();
+		dtos.add(new NoticeGetResponseDto(1L, "NEWS", "뉴스", "내용1", "첨부파일1", false, LocalDate.now()));
+		dtos.add(new NoticeGetResponseDto(2L, "DATA", "자료", "내용2", "첨부파일2", true, LocalDate.now()));
+		Page<NoticeGetResponseDto> response = new PageImpl<>(dtos, pageable, 2);
+
+		given(noticeService.getCategoryNotices(anyString(), any())).willReturn(response);
+		ResultActions result = mockMvc.perform(
+			get("/notices/category")
+				.param("search", "자료")
+		);
+
+		result.andExpect(status().isOk());
+		verify(noticeService, times(1)).getCategoryNotices(anyString(), any());
+	}
+
+	@Test
+	void 공지사항_키워드_검색() throws Exception {
+		PageRequest pageable = PageRequest.of(0, 5);
+		List<NoticeGetResponseDto> dtos = new ArrayList<>();
+		dtos.add(new NoticeGetResponseDto(1L, "NEWS", "뉴스", "내용1", "첨부파일1", false, LocalDate.now()));
+		dtos.add(new NoticeGetResponseDto(2L, "DATA", "자료", "내용2", "첨부파일2", true, LocalDate.now()));
+		Page<NoticeGetResponseDto> response = new PageImpl<>(dtos, pageable, 2);
+
+		given(noticeService.searchNotice(anyString(), any())).willReturn(response);
+		ResultActions result = mockMvc.perform(
+			get("/notices/keyword")
+				.param("search", "뉴스")
+		);
+
+		result.andExpect(status().isOk());
+		verify(noticeService, times(1)).searchNotice(anyString(), any());
+	}
 }
