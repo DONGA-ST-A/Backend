@@ -23,6 +23,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
@@ -98,5 +99,22 @@ public class NoticeControllerTest {
 
 		result.andExpect(status().isOk());
 		verify(noticeService, times(1)).searchNotice(anyString(), any());
+	}
+
+	@Test
+	void 공지사항_상세_조회() throws Exception{
+
+		List<NoticeGetResponseDto> dtos = new ArrayList<>();
+		dtos.add(new NoticeGetResponseDto(1L, "DATA", "자료", "내용2", "첨부파일2", true, LocalDate.now()));
+		dtos.add(new NoticeGetResponseDto(2L, "DATA", "자료", "내용2", "첨부파일2", true, LocalDate.now()));
+
+		given(noticeService.getNotice(any())).willReturn(dtos);
+		ResultActions result = mockMvc.perform(
+			get("/notices/1")
+		);
+
+		result.andExpect(status().isOk())
+			.andDo(MockMvcResultHandlers.print());
+		verify(noticeService, times(1)).getNotice(any());
 	}
 }

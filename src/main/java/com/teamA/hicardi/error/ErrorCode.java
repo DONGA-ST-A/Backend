@@ -21,7 +21,8 @@ public enum ErrorCode {
     WRONG_SEARCH(BAD_REQUEST, "검색어를 입력해야 합니다."),
     INVALID_TOKEN(UNAUTHORIZED, "잘못된 토큰입니다."),
     CART_NOT_FOUND(NOT_FOUND, "해당 장바구니를 찾을 수 없습니다."),
-    ITEM_NOT_FOUND(NOT_FOUND, "해당 상품을 찾을 수 없습니다.");
+    ITEM_NOT_FOUND(NOT_FOUND, "해당 상품을 찾을 수 없습니다."),
+    NOTICE_NOT_FOUND(NOT_FOUND, "해당 공지사항을 찾을 수 없습니다.");
 
 
 
