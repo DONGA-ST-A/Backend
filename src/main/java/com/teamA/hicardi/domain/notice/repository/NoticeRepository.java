@@ -21,4 +21,10 @@ public interface NoticeRepository extends JpaRepository<Notice, Long> {
 	@Query("SELECT n FROM Notice n " +
 		" WHERE n.title LIKE %:search% OR n.content LIKE %:search% ")
 	Page<Notice> findAllBySearch(@Param("search") String search, Pageable pageable);
+
+	@Query("SELECT n FROM Notice n WHERE n.id < :noticeId ORDER BY n.id DESC LIMIT 1")
+	Notice findPreviousNotice(@Param("noticeId") Long noticeId);
+	@Query("SELECT n FROM Notice n WHERE n.id > :noticeId ORDER BY n.id LIMIT 1")
+	Notice findNextNotice(@Param("noticeId") Long noticeId);
+
 }
