@@ -49,13 +49,13 @@ INSERT INTO ItemTag (id, itemId, Tag, createdDate, modifiedDate) VALUES(16, 8, '
 INSERT INTO ItemTag (id, itemId, Tag, createdDate, modifiedDate) VALUES(17, 9, 'SmartPhone', NOW(), NOW());
 INSERT INTO ItemTag (id, itemId, Tag, createdDate, modifiedDate) VALUES(18, 9, 'AdditionalItem', NOW(), NOW());
 
-INSERT INTO Notice(id, title, content, istop, file, category, createdDate, modifiedDate) VALUES(1, '의료기기 스타트업, 내수 수출 교두부 확보', '내용', 0, null, 'NEWS', '2023-08-15', '2023-08-15');
-INSERT INTO Notice(id, title, content, istop, file, category, createdDate, modifiedDate) VALUES(2, '[2023.08.20 기준] 하이카디 플러스 패치 업데이트 안내', '내용', 1, null, 'UPDATE', '2023-08-20', '2023-08-20');
-INSERT INTO Notice(id, title, content, istop, file, category, createdDate, modifiedDate) VALUES(3, '의정부 튼튼어린이병원, 심질환 환아 감시 하이카디플러스 도입', '내용', 0, null, 'NEWS', '2023-08-20', '2023-08-20');
-INSERT INTO Notice(id, title, content, istop, file, category, createdDate, modifiedDate) VALUES(4, '[2023.09.17 마감] 하이카디 체험단 모집', '내용', 1, '첨부파일', 'NECESSARY', '2023-09-08', '2023-09-08');
-INSERT INTO Notice(id, title, content, istop, file, category, createdDate, modifiedDate) VALUES(5, '하이카디 갤럭시A13 연동 방법', '내용', 0, '첨부파일', 'DATA', '2023-09-08', '2023-09-08');
+INSERT INTO Notice(id, title, content, istop, file, category, createdDate, modifiedDate) VALUES(1, '의료기기 스타트업, 내수 수출 교두부 확보', 'https://hicardi.s3.ap-northeast-2.amazonaws.com/notice1.svg', 0, null, 'NEWS', '2023-08-15', '2023-08-15');
+INSERT INTO Notice(id, title, content, istop, file, category, createdDate, modifiedDate) VALUES(2, '[2023.08.20 기준] 하이카디 플러스 패치 업데이트 안내', 'https://hicardi.s3.ap-northeast-2.amazonaws.com/notice1.svg', 1, null, 'UPDATE', '2023-08-20', '2023-08-20');
+INSERT INTO Notice(id, title, content, istop, file, category, createdDate, modifiedDate) VALUES(3, '의정부 튼튼어린이병원, 심질환 환아 감시 하이카디플러스 도입', 'https://hicardi.s3.ap-northeast-2.amazonaws.com/notice1.svg', 0, null, 'NEWS', '2023-08-20', '2023-08-20');
+INSERT INTO Notice(id, title, content, istop, file, category, createdDate, modifiedDate) VALUES(4, '[2023.09.17 마감] 하이카디 체험단 모집', 'https://hicardi.s3.ap-northeast-2.amazonaws.com/notice1.svg', 1, 'hicardi_seminar.jpg(1.8MB)', 'NECESSARY', '2023-09-08', '2023-09-08');
+INSERT INTO Notice(id, title, content, istop, file, category, createdDate, modifiedDate) VALUES(5, '하이카디 갤럭시A13 연동 방법', 'https://hicardi.s3.ap-northeast-2.amazonaws.com/notice1.svg', 0, 'hicardi_seminar.jpg(1.8MB)', 'DATA', '2023-09-08', '2023-09-08');
 INSERT INTO Notice(id, title, content, istop, file, category, createdDate, modifiedDate) VALUES(6, '[2023.09.15 마감] 하이카디플러스 소개 및 설명회 참여 인원 모집', 'https://hicardi.s3.ap-northeast-2.amazonaws.com/notice1.svg' , 1, 'hicardi_seminar.jpg(1.8MB)', 'NECESSARY', '2023-09-09', '2023-09-09');
-INSERT INTO Notice(id, title, content, istop, file, category, createdDate, modifiedDate) VALUES(7, '하이카디 패치 사용법', '내용', 0, '첨부파일', 'DATA', '2023-09-09', '2023-09-09');
-INSERT INTO Notice(id, title, content, istop, file, category, createdDate, modifiedDate) VALUES(8, '하이카디 갤럭시A13 연동 방법', '내용', 0, '첨부파일', 'DATA', '2023-09-09', '2023-09-09');
-INSERT INTO Notice(id, title, content, istop, file, category, createdDate, modifiedDate) VALUES(9, '하이카디 패치 사용법', '내용', 0, '첨부파일', 'DATA', '2023-09-10', '2023-09-10');
-INSERT INTO Notice(id, title, content, istop, file, category, createdDate, modifiedDate) VALUES(10, '메쥬, "하이카디" 전남대병원과 혁신제품 시범구매사업 진행', '내용', 0, null, 'NEWS', '2023-09-12', '2023-09-12');
+INSERT INTO Notice(id, title, content, istop, file, category, createdDate, modifiedDate) VALUES(7, '하이카디 패치 사용법', 'https://hicardi.s3.ap-northeast-2.amazonaws.com/notice1.svg', 0, 'hicardi_seminar.jpg(1.8MB)', 'DATA', '2023-09-09', '2023-09-09');
+INSERT INTO Notice(id, title, content, istop, file, category, createdDate, modifiedDate) VALUES(8, '하이카디 갤럭시A13 연동 방법', 'https://hicardi.s3.ap-northeast-2.amazonaws.com/notice1.svg', 0, 'hicardi_seminar.jpg(1.8MB)', 'DATA', '2023-09-09', '2023-09-09');
+INSERT INTO Notice(id, title, content, istop, file, category, createdDate, modifiedDate) VALUES(9, '하이카디 패치 사용법', 'https://hicardi.s3.ap-northeast-2.amazonaws.com/notice1.svg', 0, 'hicardi_seminar.jpg(1.8MB)', 'DATA', '2023-09-10', '2023-09-10');
+INSERT INTO Notice(id, title, content, istop, file, category, createdDate, modifiedDate) VALUES(10, '메쥬, "하이카디" 전남대병원과 혁신제품 시범구매사업 진행', 'https://hicardi.s3.ap-northeast-2.amazonaws.com/notice1.svg', 0, null, 'NEWS', '2023-09-12', '2023-09-12');
