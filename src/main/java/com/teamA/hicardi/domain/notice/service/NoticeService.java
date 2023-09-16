@@ -43,6 +43,7 @@ public class NoticeService {
 		return response;
 	}
 
+	@Transactional
 	public List<NoticeGetResponseDto> getNotice(Long noticeId) {
 
 		Notice notice = noticeRepository.findById(noticeId)
