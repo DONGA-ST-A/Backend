@@ -48,6 +48,8 @@ public class NoticeService {
 		Notice notice = noticeRepository.findById(noticeId)
 			.orElseThrow(() -> new BusinessException(ErrorCode.NOTICE_NOT_FOUND));
 
+		noticeRepository.updateView(noticeId);
+
 		Notice previousNotice = noticeRepository.findPreviousNotice(noticeId);
 
 		Notice nextNotice = noticeRepository.findNextNotice(noticeId);
