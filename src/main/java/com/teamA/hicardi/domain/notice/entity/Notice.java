@@ -29,4 +29,7 @@ public class Notice extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private NoticeCategory category;
 
+    @Column(columnDefinition = "Integer default 1")
+    private int views;
+
 }
