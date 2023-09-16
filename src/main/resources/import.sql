@@ -29,6 +29,7 @@ INSERT INTO ItemImage(id, image, itemId, createdDate, modifiedDate) VALUES (4, '
 INSERT INTO ItemImage(id, image, itemId, createdDate, modifiedDate) VALUES (5, 'https://hicardi.s3.ap-northeast-2.amazonaws.com/itemImage5.svg', 1, now(), now());
 INSERT INTO ItemImage(id, image, itemId, createdDate, modifiedDate) VALUES (6, 'https://hicardi.s3.ap-northeast-2.amazonaws.com/itemImage6.svg', 1, now(), now());
 INSERT INTO ItemImage(id, image, itemId, createdDate, modifiedDate) VALUES (7, 'https://hicardi.s3.ap-northeast-2.amazonaws.com/itemImage7.svg', 1, now(), now());
+INSERT INTO ItemImage(id, image, itemId, createdDate, modifiedDate) VALUES (8, 'https://hicardi.s3.ap-northeast-2.amazonaws.com/itemImage8.svg', 1, now(), now());
 
 INSERT INTO ItemTag (id, itemId, Tag, createdDate, modifiedDate) VALUES(1, 1, 'SmartPatch', NOW(), NOW());
 INSERT INTO ItemTag (id, itemId, Tag, createdDate, modifiedDate)  VALUES(2, 1, 'DeviceBody', NOW(), NOW());
