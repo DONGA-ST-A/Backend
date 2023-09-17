@@ -11,7 +11,7 @@
 <br>
 
 ## 🛠️ Stack
-<img src="https://github.com/DONGA-ST-A/Backend/assets/80199502/b3b0b68c-1c95-4253-81a4-4e9d58974e6c"  width="540">
+<img src="https://github.com/DONGA-ST-A/Backend/assets/80199502/b3b0b68c-1c95-4253-81a4-4e9d58974e6c"  width="480">
 <br>
 <br>
 
@@ -20,5 +20,5 @@
 <img src="https://github.com/DONGA-ST-A/Backend/assets/80199502/26f12e57-9c30-4c6e-8f0d-c295eb4d642d"  width="1300">
 
 ### CI/CD
-<img src="https://github.com/DONGA-ST-A/Backend/assets/80199502/48b4c654-85f0-4b85-b248-e255b4ac98a3"  width="1500">
+<img src="https://github.com/DONGA-ST-A/Backend/assets/80199502/48b4c654-85f0-4b85-b248-e255b4ac98a3"  width="800">
 
