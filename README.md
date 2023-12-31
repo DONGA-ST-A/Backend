@@ -17,7 +17,7 @@
 
 ## 💻 Architecture
 ### Infrastructure
-<img src="https://github.com/DONGA-ST-A/Backend/assets/80199502/26f12e57-9c30-4c6e-8f0d-c295eb4d642d"  width="1300">
+<img src="https://github.com/DONGA-ST-A/Backend/assets/80199502/e1301f1d-64af-4523-9824-edaad409a62f"  width="1500">
 
 ### CI/CD
 <img src="https://github.com/DONGA-ST-A/Backend/assets/80199502/48b4c654-85f0-4b85-b248-e255b4ac98a3"  width="800">
